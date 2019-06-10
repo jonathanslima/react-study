@@ -9,7 +9,9 @@ import Header from './components/Header/index';
 
 const App = ()=>{
   return (
-    <Header />
+    <div className="App">
+      <Header />
+    </div>
   );
 }
 
