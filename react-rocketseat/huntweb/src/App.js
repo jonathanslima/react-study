@@ -1,8 +1,13 @@
+/* Imports ****************************************/
 import React from 'react';
-import './styles.css'
+
+/* CSS *******************************************/
+import './styles.css';
+
+/* Components ************************************/
 import Header from './components/Header/index';
 
-const App = ()=> {
+const App = ()=>{
   return (
     <Header />
   );
