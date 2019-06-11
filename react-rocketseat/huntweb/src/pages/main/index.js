@@ -17,13 +17,14 @@ class Main extends Component{
     const response = await api.get('/products');
     this.setState({products: response.data.docs});
     console.log(response)
+    console.log(this.state.products)
   }
 
   render(){
     return (
       <div className="product-list">
         {this.state.products.map(product => (
-          <h2>{product.title}</h2>
+          <h2 key={product._id}>{product.title}</h2>
         ))}
       </div>
     )
