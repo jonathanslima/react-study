@@ -13,6 +13,7 @@ export default class Form extends Component {
 		}
 
 		this.state = this.stateInicial;
+		this.submitForm = this.submitForm.bind(this);
 	}
 
 	ouvinteEvento = event => {
@@ -27,7 +28,7 @@ export default class Form extends Component {
 		})
 	}
 
-	submitForm = (props)=> {
+	submitForm(props) {
 		this.props.ouvinteSubmit(this.state);
 		this.setState(this.stateInicial);
 	}
