@@ -1,20 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import './login.css';
+import firebase from '../../config/firebase';
+import 'firebase/auth';
 
-function login() {
+function Login() {
+  const [email, setEmail] = useState();
+  const [senha, setSenha] = useState();
+  const [msgTipo, setMsgTipo] = useState();
+  
+  function logar(){
+    firebase.auth().signInWithEmailAndPassword(email, senha)
+      .then(()=> setMsgTipo('sucesso'))
+      .catch(()=> {
+        setMsgTipo('erro');
+        console.error('Erro na autenticação do usuário. Checar senha e login.')
+      })
+  }
   return (
     <div className="d-flex login-content align-items-center justify-content-center">
       <form className="form-signin mx-auto">
         <h1 className="h3 mb-3 font-weight-normal text-white font-weight-bold text-center">Please sign in</h1>
-        <input type="email" id="inputEmail" className="form-control my-2" placeholder="Email address" />
+        <input onChange={e => setEmail(e.target.value)} type="email" id="inputEmail" className="form-control my-2" placeholder="Email address" />
 
-        <input type="password" id="inputPassword" className="form-control my-2" placeholder="Password" />
+        <input onChange={e => setSenha(e.target.value)} type="password" id="inputPassword" className="form-control my-2" placeholder="Password" />
 
-        <button className="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
+        <button onClick={logar} className="btn btn-lg btn-login btn-block" type="button">Sign in</button>
         
         <div className="msg-login text-white my-5 text-center">
-          <span>Você está conectado! &#128526;</span><br />
-          <span>Verifique se os dados estão corretos. &#128546;</span>
+          { msgTipo == 'sucesso' &&  <span>Você está conectado! &#128526;</span> }
+          { msgTipo == 'erro' && <span>Verifique se os dados estão corretos. &#128546;</span> }
         </div>
 
         <div className="opcoes-login my-5">
@@ -27,4 +41,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;
