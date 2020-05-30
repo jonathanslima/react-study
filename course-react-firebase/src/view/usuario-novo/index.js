@@ -7,8 +7,8 @@ function NovoUsuario() {
 
 	const [email, setEmail] = useState();
 	const [senha, setSenha] = useState();
-	const [msgTipo, setMsgTipo] = useState();
-	const [msg, setMsg] = useState();
+	let [msgTipo, setMsgTipo] = useState();
+	let [msg, setMsg] = useState();
 
 	function cadastrar(){
 		setMsgTipo(null)
@@ -74,8 +74,8 @@ function NovoUsuario() {
 				</button>
 
 				<div className="msg-login text-black text-center my-5">
-					{ msgTipo == 'sucesso' && <span>Cadastro realizado com sucesso! &#128526;</span> }
-					{ msgTipo == 'erro' && <span> <strong>Ops!</strong> {msg} &#128546;</span> }
+					{ msgTipo === 'sucesso' && <span>Cadastro realizado com sucesso! &#128526;</span> }
+					{ msgTipo === 'erro' && <span> <strong>Ops!</strong> {msg} <span aria-label="sad face" role="img">&#128546;</span></span> }
 				</div>
 			</form>
 		</div>
