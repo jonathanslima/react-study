@@ -8,7 +8,17 @@ function NovoUsuario() {
 	const [email, setEmail] = useState();
 	const [senha, setSenha] = useState();
 	let [msgTipo, setMsgTipo] = useState();
-	let [msg, setMsg] = useState();
+  let [msg, setMsg] = useState();
+  
+  function mensagens(res){
+    let msg = {
+      'Password should be at least 6 characters': 'Senhas devem ter no mínimo 6 caracteres.',
+      'The email address is already in use by another account.': 'O e-mail informado já foi cadastrado.',
+      'The email address is badly formatted.': 'O formato do e-mail é invalido!',
+      'default': 'Não foi possível cadastrar no momento. Tente novamente mais tarde.'
+    };
+    return (msg[res] || msg['default']);
+  }
 
 	function cadastrar(){
 		setMsgTipo(null)
@@ -21,29 +31,14 @@ function NovoUsuario() {
 
 		firebase.auth().createUserWithEmailAndPassword(email, senha)
 			.then(()=>{
-				setMsgTipo = 'sucesso'
+        setMsgTipo('sucesso');
+        setMsg('Cadastro realizado com sucesso!')
+        console.log(msg)
 			})
 			.catch((error)=>{
-				console.log(error.message)
-				switch(error.message){
-					case 'Password should be at least 6 characters':
-						setMsg('Senhas devem ter no mínimo 6 caracteres.');
-						break;
-
-					case 'The email address is already in use by another account.':
-						setMsg('O e-mail informado já foi cadastrado.');
-						break;
-
-					case 'The email address is badly formatted.':
-						setMsg('O formato do e-mail é invalido!');
-						break;
-
-					default:
-						setMsg('Não foi possível cadastrar no momento. Tente novamente mais tarde.');
-						break;
-				}
-
-			})
+        setMsgTipo('erro')
+        setMsg(mensagens(error.message))
+      })
 	}
 
 	return (
@@ -74,7 +69,7 @@ function NovoUsuario() {
 				</button>
 
 				<div className="msg-login text-black text-center my-5">
-					{ msgTipo === 'sucesso' && <span>Cadastro realizado com sucesso! &#128526;</span> }
+					{ msgTipo === 'sucesso' && <span>{msg} &#128526;</span> }
 					{ msgTipo === 'erro' && <span> <strong>Ops!</strong> {msg} <span aria-label="sad face" role="img">&#128546;</span></span> }
 				</div>
 			</form>
