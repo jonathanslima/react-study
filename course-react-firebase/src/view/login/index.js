@@ -3,6 +3,8 @@ import './login.css';
 import firebase from '../../config/firebase';
 import 'firebase/auth';
 
+import { Link } from 'react-router-dom';
+
 function Login() {
   const [email, setEmail] = useState();
   const [senha, setSenha] = useState();
@@ -27,14 +29,14 @@ function Login() {
         <button onClick={logar} className="btn btn-lg btn-login btn-block" type="button">Sign in</button>
         
         <div className="msg-login text-white my-5 text-center">
-          { msgTipo == 'sucesso' &&  <span>Você está conectado! &#128526;</span> }
+          { msgTipo == 'sucesso' && <span>Você está conectado! &#128526;</span> }
           { msgTipo == 'erro' && <span>Verifique se os dados estão corretos. &#128546;</span> }
         </div>
 
         <div className="opcoes-login my-5">
           <a href="#" className="mx-2">Recuperar senha</a>
           <span className="text-white">&#9733;</span>
-          <a href="#" className="mx-2">Quero cadastrar</a>
+          <Link to='cadastrar' className="mx-2">Quero cadastrar</Link>
         </div>
       </form>
     </div>
