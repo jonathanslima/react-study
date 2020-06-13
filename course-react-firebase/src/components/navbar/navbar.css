@@ -1,0 +1,12 @@
+.navbar{
+	background-color: #614ea6;
+}
+
+.nav-item a{
+	color: #fff;
+	transition: .3s easy-in;
+}
+
+.nav-item a{
+	color: #f21667;
+}

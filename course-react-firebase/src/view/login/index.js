@@ -2,17 +2,25 @@ import React, { useState } from "react";
 import './login.css';
 import firebase from '../../config/firebase';
 import 'firebase/auth';
-
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 function Login() {
   const [email, setEmail] = useState();
   const [senha, setSenha] = useState();
   const [msgTipo, setMsgTipo] = useState();
+
+  const dispatch = useDispatch();
   
   function logar(){
     firebase.auth().signInWithEmailAndPassword(email, senha)
-      .then(()=> setMsgTipo('sucesso'))
+      .then(()=> {
+        setMsgTipo('sucesso')
+        dispatch({
+          type: 'LOG_IN',
+          usuarioEmail: email
+        })
+      })
       .catch(()=> {
         setMsgTipo('erro');
         console.error('Erro na autenticação do usuário. Checar senha e login.')
@@ -20,6 +28,9 @@ function Login() {
   }
   return (
     <div className="d-flex login-content align-items-center justify-content-center">
+      {
+        useSelector(state => state.usuarioLogado) > 0 ? <Redirect to="/" /> : null
+      }
       <form className="form-signin mx-auto">
         <h1 className="h3 mb-3 font-weight-normal text-white font-weight-bold text-center">Please sign in</h1>
         <input onChange={e => setEmail(e.target.value)} type="email" id="inputEmail" className="form-control my-2" placeholder="Email address" />
