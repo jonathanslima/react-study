@@ -7,7 +7,8 @@ import { Provider } from "react-redux";
 import Login from "./view/login";
 import NovoUsuario from "./view/usuario-novo";
 import Home from "./view/home";
-import UsuarioRecuperarSenha from './view/usuario-recuperar-senha'
+import UsuarioRecuperarSenha from './view/usuario-recuperar-senha';
+import EventoCadastro from './view/evento-cadastro'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/login" component={Login} />
         <Route exact path="/cadastrar" component={NovoUsuario} />
 				<Route exact path="/recuperar-senha" component={UsuarioRecuperarSenha}></Route>
+				<Route exact path="/evento-cadastro" component={EventoCadastro}></Route>
       </Router>
     </Provider>
   );
