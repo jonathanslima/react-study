@@ -7,6 +7,6 @@
 	transition: .3s easy-in;
 }
 
-.nav-item a{
+.nav-item a:hover{
 	color: #f21667;
 }

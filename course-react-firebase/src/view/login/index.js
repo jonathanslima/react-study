@@ -11,7 +11,7 @@ function Login() {
   const [msgTipo, setMsgTipo] = useState();
 
   const dispatch = useDispatch();
-  
+
   function logar(){
     firebase.auth().signInWithEmailAndPassword(email, senha)
       .then(()=> {
@@ -38,14 +38,14 @@ function Login() {
         <input onChange={e => setSenha(e.target.value)} type="password" id="inputPassword" className="form-control my-2" placeholder="Password" />
 
         <button onClick={logar} className="btn btn-lg btn-login btn-block" type="button">Sign in</button>
-        
+
         <div className="msg-login text-white my-5 text-center">
           { msgTipo == 'sucesso' && <span>Você está conectado! &#128526;</span> }
           { msgTipo == 'erro' && <span>Verifique se os dados estão corretos. &#128546;</span> }
         </div>
 
         <div className="opcoes-login my-5">
-          <a href="#" className="mx-2">Recuperar senha</a>
+          <Link to="/recuperar-senha" className="mx-2">Recuperar senha</Link>
           <span className="text-white">&#9733;</span>
           <Link to='cadastrar' className="mx-2">Quero cadastrar</Link>
         </div>
