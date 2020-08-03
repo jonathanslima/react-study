@@ -21,8 +21,6 @@ function Home() {
 			})
 
 			setEventos(listaEventos);
-
-			console.log(listaEventos)
 		})
 	}, [])
 
@@ -31,7 +29,7 @@ function Home() {
 			<Navbar />
 			<div className="container-fluid">
 				<div className="row">
-					<EventoCard />
+					{eventos.map(item => <EventoCard id={item.id} titulo={item.titulo} img={item.foto} detalhes={item.detalhes} visualizacoes={item.visualizacoes} />)}
 				</div>
 			</div>
 		</>

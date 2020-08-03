@@ -42,7 +42,7 @@ function EventoCadastro() {
 				setMsgTipo('sucesso')
 
 			})
-			.then(error => {
+			.catch(error => {
 				setMsgTipo('erro')
 			})
 	}
@@ -65,13 +65,14 @@ function EventoCadastro() {
 					<div className="form-group">
 						<label htmlFor="">Tipo do evento</label>
 						<select className="form-control" onChange={e => setTipo(e.target.value)}>
-							<option selected disabled value>
+							<option selected disabled defaultValue="selecione">
 								Selecione o tipo
 							</option>
-							<option value="confra">Confra</option>
-							<option value="teatro">Teatro</option>
-							<option value="show">Show</option>
-							<option value="casamentos">Casamentos</option>
+							<option defaultValue="confra">Confra</option>
+							<option defaultValue="teatro">Teatro</option>
+							<option defaultValue="curso">Curso</option>
+							<option defaultValue="show">Show</option>
+							<option defaultValue="casamentos">Casamentos</option>
 						</select>
 					</div>
 
