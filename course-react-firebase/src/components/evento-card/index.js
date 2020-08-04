@@ -9,12 +9,11 @@ function EventoCard({ id, img, titulo, detalhes, visualizacoes }) {
 	const [urlImage, setUrlImage] = useState();
 
 	useEffect(() => {
-		console.log('atualiza')
 		firebase.storage().ref(`imagens/${img}`).getDownloadURL()
 			.then(url => setUrlImage(url))
-	}, [urlImage])
+	}, [titulo])
 	return (
-		<div className="col-md-3 col-sm-12 block-card">
+		<div key={id} className="col-md-3 col-sm-12 block-card">
 			<img src={urlImage} alt="" className="card-img-top img-cartao" />
 
 			<div className="card-body">

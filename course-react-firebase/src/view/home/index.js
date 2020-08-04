@@ -25,7 +25,7 @@ function Home() {
 
 			setEventos(listaEventos);
 		})
-	}, [eventos])
+	}, [pesquisa])
 
 	return (
 		<>
