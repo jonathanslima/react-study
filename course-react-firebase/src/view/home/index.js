@@ -9,24 +9,31 @@ import { useState, useEffect } from 'react';
 
 function Home() {
 	const [eventos, setEventos] = useState([]);
+	const [pesquisa, setPesquisa] = useState('');
 	let listaEventos = [];
 
 	useEffect(() => {
 		firebase.firestore().collection('eventos').get().then(async (resultados) => {
 			await resultados.docs.forEach(doc => {
-				listaEventos.push({
-					id: doc.id,
-					...doc.data()
-				})
+				if (doc.data().titulo.indexOf(pesquisa) >= 0) {
+					listaEventos.push({
+						id: doc.id,
+						...doc.data()
+					})
+				}
 			})
 
 			setEventos(listaEventos);
 		})
-	}, [])
+	}, [eventos])
 
 	return (
 		<>
 			<Navbar />
+			<div className="row p-5">
+				<input type="text" onChange={(e) => setPesquisa(e.target.value)} className="form-control" placeholder="Pesquisar evento pelo título..." />
+			</div>
+
 			<div className="container-fluid">
 				<div className="row">
 					{eventos.map(item => <EventoCard id={item.id} titulo={item.titulo} img={item.foto} detalhes={item.detalhes} visualizacoes={item.visualizacoes} />)}
