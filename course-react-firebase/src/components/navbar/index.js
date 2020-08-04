@@ -39,7 +39,7 @@ function Navbar() {
 									</Link>
 								</li>
 								<li className="nav-item active">
-									<Link className="nav-link" to="/">
+									<Link className="nav-link" to="/eventos/meus">
 										Meus Eventos
 									</Link>
 								</li>
@@ -56,19 +56,19 @@ function Navbar() {
 								</li>
 							</>
 						) : (
-							<>
-								<li className="nav-item active">
-									<Link className="nav-link" to="/cadastrar">
-										Cadastrar{" "}
-									</Link>
-								</li>
-								<li className="nav-item active">
-									<Link className="nav-link" to="/login">
-										Login{" "}
-									</Link>
-								</li>
-							</>
-						)}
+								<>
+									<li className="nav-item active">
+										<Link className="nav-link" to="/cadastrar">
+											Cadastrar{" "}
+										</Link>
+									</li>
+									<li className="nav-item active">
+										<Link className="nav-link" to="/login">
+											Login{" "}
+										</Link>
+									</li>
+								</>
+							)}
 					</ul>
 				</div>
 			</nav>

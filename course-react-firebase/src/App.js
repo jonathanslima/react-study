@@ -11,17 +11,18 @@ import UsuarioRecuperarSenha from './view/usuario-recuperar-senha';
 import EventoCadastro from './view/evento-cadastro'
 
 function App() {
-  return (
-    <Provider store={store}>
-      <Router>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/cadastrar" component={NovoUsuario} />
+	return (
+		<Provider store={store}>
+			<Router>
+				<Route exact path="/" component={Home} />
+				<Route exact path="/login" component={Login} />
+				<Route exact path="/cadastrar" component={NovoUsuario} />
 				<Route exact path="/recuperar-senha" component={UsuarioRecuperarSenha}></Route>
 				<Route exact path="/evento-cadastro" component={EventoCadastro}></Route>
-      </Router>
-    </Provider>
-  );
+				<Route exact path="/eventos/:parametro" component={Home}></Route>
+			</Router>
+		</Provider>
+	);
 }
 
 export default App;

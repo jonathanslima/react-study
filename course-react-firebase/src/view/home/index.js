@@ -6,26 +6,43 @@ import EventoCard from '../../components/evento-card'
 
 import firebase from '../../config/firebase';
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
-function Home() {
+function Home(match) {
 	const [eventos, setEventos] = useState([]);
 	const [pesquisa, setPesquisa] = useState('');
+	const usuarioEmail = useSelector(state => state.usuarioEmail);
 	let listaEventos = [];
 
 	useEffect(() => {
-		firebase.firestore().collection('eventos').get().then(async (resultados) => {
-			await resultados.docs.forEach(doc => {
-				if (doc.data().titulo.indexOf(pesquisa) >= 0) {
-					listaEventos.push({
-						id: doc.id,
-						...doc.data()
-					})
-				}
+		if (match.match.params.parametro) {
+			firebase.firestore().collection('eventos').where('usuario', '==', usuarioEmail).get().then(async (resultados) => {
+				await resultados.docs.forEach(doc => {
+					if (doc.data().titulo.indexOf(pesquisa) >= 0) {
+						listaEventos.push({
+							id: doc.id,
+							...doc.data()
+						})
+					}
+				})
+				setEventos(listaEventos);
 			})
 
-			setEventos(listaEventos);
-		})
+		} else {
+			firebase.firestore().collection('eventos').get().then(async (resultados) => {
+				await resultados.docs.forEach(doc => {
+					if (doc.data().titulo.indexOf(pesquisa) >= 0) {
+						listaEventos.push({
+							id: doc.id,
+							...doc.data()
+						})
+					}
+				})
+				setEventos(listaEventos);
+			})
+		}
 	}, [pesquisa])
+
 
 	return (
 		<>

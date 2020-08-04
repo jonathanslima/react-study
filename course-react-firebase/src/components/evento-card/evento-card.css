@@ -25,6 +25,7 @@
 
 .img-cartao {
 	max-height: 200px;
+	height: 100%;
 	min-width: 100%;
 	overflow: hidden;
 }
